@@ -1,14 +1,12 @@
-// import Parent from "./Topic-2 children prop/Parent"
-// import Counter from "./Topic-3 State in React/Counter"
-// import Home from "./Topic-3 State in React/Home";
-// import Register from "./Topic-4 useState in Form/Register";
-import "./App.css";
-import User from "./Topic-5 API Calling/User";
 
+// import "./App.css";
+// import Shop from "./Topic-6 useEffect/Shop";
+
+import Signup  from "./Topic-7 Form Handling/Signup";
 const App = () => {
 
   return <div className="app-component">
-     <User/>
+     <Signup/>
   </div>;
 };
 
