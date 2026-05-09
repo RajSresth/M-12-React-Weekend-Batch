@@ -1,13 +1,14 @@
-
-// import "./App.css";
-// import Shop from "./Topic-6 useEffect/Shop";
-
-import Signup  from "./Topic-7 Form Handling/Signup";
+import { Outlet } from "react-router-dom";
+import Header from "./Topic-8 React Routing/components/Header.jsx";
 const App = () => {
-
-  return <div className="app-component">
-     <Signup/>
-  </div>;
+  return (
+    <div className="app">
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
 };
 
 export default App;
