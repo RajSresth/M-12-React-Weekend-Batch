@@ -10,7 +10,6 @@ const Card = ({ category, title, oldPrice, price, image }) => {
 
   return (
     <div className="group w-60 rounded-2xl bg-white border border-gray-100 overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-      
       {/* Image Section */}
       <div className="relative h-50 bg-gray-50 flex items-center justify-center overflow-hidden">
         <img

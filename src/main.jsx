@@ -10,6 +10,9 @@ import Home from './Topic-8 React Routing/pages/Home.jsx';
 import Shop from './Topic-8 React Routing/pages/Shop.jsx';
 import Profile from './Topic-8 React Routing/pages/Profile.jsx';
 import ProductPage from './Topic-8 React Routing/pages/ProductPage.jsx';
+import Order from './Topic-8 React Routing/pages/Order.jsx';
+import { getCurrentLocation, handleSingupForm } from './Topic-8 React Routing/services/api.js';
+import ErrorPage from './Topic-8 React Routing/pages/ErrorPage.jsx';
 
 const appRouter = createBrowserRouter([
     {
@@ -22,7 +25,13 @@ const appRouter = createBrowserRouter([
             },
             {
                 path:"shop",
-                element: <Shop/>
+                element: <Shop/>,
+                loader: getCurrentLocation,
+                errorElement: <ErrorPage/>
+            },
+            {
+                path:"order",
+                element: <Order/>
             },
             {
                 path: "profile",
@@ -36,7 +45,9 @@ const appRouter = createBrowserRouter([
     },
     {
         path: "/register",
-        element: <Signup />
+        element: <Signup />,
+        action: handleSingupForm,
+        errorElement: <ErrorPage/>
     },
     {
         path: "*",

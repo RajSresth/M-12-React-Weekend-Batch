@@ -2,58 +2,19 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { Form, useActionData } from "react-router-dom";
 
 const Signup = () => {
-  // const [fullname, setFullname] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
 
-  const [form, setForm] = useState({
-    fullname: "",
-    email: "",
-    password: "",
-  });
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target; // {fullname = value}
-    setForm({ ...form, [name]: value });
-  };
-
-  const handleSingupForm = async (e) => {
-    e.preventDefault();
-
-
-    // console.log("fullname:",form.fullname);
-    // console.log("Email:",form.email);
-    // console.log("Password:",form.password);
-
-    // setForm({
-    //         fullname: "",
-    //         email: "",
-    //         password: "",
-    //     })
-
-    try {
-      const { data } = axios.post(
-        "https://theindianhome.in/api/auth/register",
-        {
-          form,
-        },
-        { withCredentials: true },
-      );
-      console.log("data:", data);
-    } catch (error) {
-      console.log("Signup Error:", error.response.data);
-    }
-  };
+  const response = useActionData()
+  console.log("response:",response);
+ 
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <form
-        action=""
+      <Form method="POST"
         className="min-w-100  bg-white rounded-2xl border-2 border-gray-200 p-8"
-        onSubmit={handleSingupForm}
       >
         <div className="mb-5">
           <h3 className="text-center font-bold text-3xl mb-2.5">Ziggy</h3>
@@ -70,8 +31,6 @@ const Signup = () => {
               type="text"
               id="username"
               name="fullname"
-              value={form.fullname}
-              onChange={handleChange}
               placeholder="Enter fullname"
               required
               className="w-full px-3 py-2.5 border border-none shadow-gray-400 shadow-xs rounded-lg focus:outline-2  focus:outline-blue-500 focus:shadow-blue-400  mt-2"
@@ -86,8 +45,6 @@ const Signup = () => {
               type="email"
               id="email"
               name="email"
-              value={form.email}
-              onChange={handleChange}
               placeholder="Enter email"
               className="w-full px-3 py-2.5 border border-none shadow-gray-400 shadow-xs rounded-lg focus:outline-2  focus:outline-blue-500 focus:shadow-blue-400  mt-2"
               required
@@ -103,8 +60,6 @@ const Signup = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                value={form.password}
-                onChange={handleChange}
                 placeholder="at least 8 characters"
                 className="w-full px-3 py-2.5 border border-none shadow-gray-400 shadow-xs rounded-lg focus:outline-2  focus:outline-blue-500 focus:shadow-blue-400 mt-2"
                 required
@@ -139,7 +94,7 @@ const Signup = () => {
             Login
           </a>
         </p>
-      </form>
+      </Form>
     </div>
   );
 };
