@@ -22,22 +22,3 @@ export const getCurrentLocation = async () => {
   return { city, state, address };
 };
 
-export const handleSingupForm = async ({ request }) => {
-  const form = await request.formData();
-
-  const user = {
-    fullname: form.get("fullname"),
-    email: form.get("email"),
-    password: form.get("password"),
-  };
-
-  const { data } = await axios.post(
-    "http://localhost:3000/api/auth/register",
-    user,
-    {
-      withCredentials: true,
-    },
-  );
-
-  return data;
-};
