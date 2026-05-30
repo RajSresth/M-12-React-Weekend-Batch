@@ -50,9 +50,7 @@ const Card = ({ category, title, oldPrice, price, image }) => {
               ₹{oldPrice.toLocaleString()}
             </span>
           </div>
-          <button className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white hover:bg-gray-700 transition-colors duration-200 shrink-0">
-            +
-          </button>
+         
         </div>
       </div>
     </div>
