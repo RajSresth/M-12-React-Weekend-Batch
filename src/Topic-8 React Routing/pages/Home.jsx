@@ -33,9 +33,9 @@ const Home = () => {
   return (
     <div className="max-w-300 h-auto p-10 flex items-center justify-center flex-row flex-wrap gap-10 mx-auto ">
       {products.slice(0, 8).map((product) => (
-      <Link  key={product._id} to={`/products/${product._id}?title=${product.title.split(" ").slice(0,3).join("-")}&page=1`}>
+        <Link key={product._id} to={`/products/${product._id}`}>
           <Card {...product} />
-      </Link>
+        </Link>
       ))}
     </div>
   );

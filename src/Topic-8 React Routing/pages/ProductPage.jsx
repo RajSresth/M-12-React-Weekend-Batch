@@ -2,26 +2,33 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {addItem, removeItem, clearCart} from "../redux/cartSlice"
 
 const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
+  const dispatch = useDispatch();
 
   const params = useParams();
   console.log("params:", params);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  console.log("searchParams:", searchParams.get("title"));
-  console.log("searchParams:", searchParams.get("page"));
+const handleAddItem = () => {
+    const item = {
+      id: product._id,
+      image: product.image,
+      title: product.title,
+      category: product.category,
+      price:product.price,
+      oldPrice:product.oldPrice,
+      description: product.description
+    }
 
-  const handleClick = () => {
-    setSearchParams({
-      ...Object.fromEntries(searchParams),
-      category: product.category.split(" ").join("-"),
-    });
-  };
+    dispatch(addItem(item))
+}
+
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -148,7 +155,7 @@ const ProductPage = () => {
             </p>
           </div>
 
-          {/* Quantity Selector */}
+          {/* Quantity Selector 
           <div className="flex items-center gap-4 pt-2">
             <div className="flex items-center border border-gray-300 rounded-lg">
               <button className="px-4 py-2 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition">
@@ -159,23 +166,14 @@ const ProductPage = () => {
                 +
               </button>
             </div>
-            <span className="text-sm text-green-600">
-              {product.stock > 0
-                ? `✓ In stock (${product.stock} available)`
-                : "Out of stock"}
-            </span>
-          </div>
+          </div>*/}
 
           {/* Action Buttons */}
           <div className="flex gap-4 pt-4">
-            <button className="flex-1 bg-gray-800 text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
-              Add To Cart
-            </button>
-            <button
-              onClick={handleClick}
-              className="flex-1 bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition duration-200"
+            <button className="flex-1 bg-gray-800 text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition duration-200 hover:cursor-pointer"
+            onClick={handleAddItem}
             >
-              Shop Now
+              Add To Cart
             </button>
           </div>
         </div>
@@ -189,19 +187,6 @@ const ProductPage = () => {
         <p className="text-gray-600 leading-relaxed mb-6">
           {product.description}
         </p>
-
-        {/* Features List 
-        <div>
-          <h3 className="text-lg font-medium text-gray-800 mb-3">Key Features</h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {product.features.map((feature, index) => (
-              <li key={index} className="flex items-center gap-2 text-gray-600">
-                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>*/}
       </div>
 
       {/* Footer */}

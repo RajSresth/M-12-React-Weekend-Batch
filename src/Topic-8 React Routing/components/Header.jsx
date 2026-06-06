@@ -2,9 +2,11 @@ import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { BsCart4 } from "react-icons/bs";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
+  const cartItems = useSelector(state => state.cart.items)
 
 
   const handleClick = ({isActive}) => {
@@ -55,11 +57,14 @@ const Header = () => {
             />
           </div>
         </div>
-        <div className="shrink-0 flex gap-5 items-center">
-          <div>
+        <div className="shrink-0 flex gap-7 items-center">
+          <div className="relative mr-4 hover:cursor-pointer" onClick={() => navigate("/cart")}>
             <BsCart4 size={24} />
+            {
+              cartItems.length > 0 && <div className="h-7 w-7 rounded-full bg-gray-300 flex items-center justify-center text-sm absolute -top-4 -right-6">{cartItems.length}</div>
+            }
           </div>
-          <div className="w-12 h-12 rounded-full border-2 border-gray-300 overflow-hidden cursor-pointer">
+          <div className="w-10 h-10 rounded-full border-2 border-gray-300 overflow-hidden cursor-pointer">
             <img
               className="object-contain"
               src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-photo-concept-default-avatar-profile-icon-vector-social-media-user-photo-284650485.jpg"

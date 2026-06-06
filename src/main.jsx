@@ -15,24 +15,32 @@ import ErrorPage from "./Topic-8 React Routing/pages/ErrorPage.jsx";
 import Login from "./Topic-8 React Routing/pages/Login.jsx";
 import { AuthProvider } from "./Topic-8 React Routing/store/AuthContext.jsx";
 import ProtectedRoute from "./Topic-8 React Routing/routes/ProtectedRoute.jsx";
+import Cart from "./Topic-8 React Routing/pages/Cart.jsx";
+
+
+import { Provider } from "react-redux";
+import store from "./Topic-8 React Routing/redux/store.js"
 
 createRoot(document.getElementById("root")).render(
-  <AuthProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<App />}>
-            <Route index element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/products/:id" element={<ProductPage />} />
+  <Provider store={store}>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<App />}>
+              <Route index element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/order" element={<Order />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/products/:id" element={<ProductPage />} />
+              <Route path="/cart" element={<Cart/>} />
+            </Route>
           </Route>
-        </Route>
-        <Route path="/register" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </AuthProvider>,
+          <Route path="/register" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>,
+  </Provider>
 );
